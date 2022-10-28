@@ -2,33 +2,24 @@
 
 kaptcha - A kaptcha generation engine clone of http://code.google.com/p/kaptcha/. Make it maven based.
 
+Now this repository is a clone of https://gitlab.com/axet/kaptcha. Aim at supporting Spring Framework 6 and Spring Boot 3.
+
 ## Goals
 
   - Make it Maven based
   - Allow use it from Spring
-
-## I've tried to use:
-
-  * JCaptcha (http://jcaptcha.sourceforge.net/)
-    - Bad community responds (bad API).
-    
-  * SimpleCaptcha (http://simplecaptcha.sourceforge.net/)
-    - Not maven based
-    - Binary based (imaging.jar represents jhlabs of 2000,
-      Internet gives me only latest com.jhlabs.filters:2.0.235 version)
-      
-  * ReCaptcha (http://www.google.com/recaptcha)
-    - Hard to read
-
-and decided to make my own fork...
+  - Support Jakarta Servlet 6.0
+  - Support Spring Framework 6
+  - Support Spring Boot 3
+  - Support Java 17
 
 ## Central Maven Repo
 ```xml
   <dependencies>
     <dependency>
-      <groupId>com.github.axet</groupId>
-      <artifactId>kaptcha</artifactId>
-      <version>0.0.9</version>
+      <groupId>io.github.timbotetsu</groupId>
+      <artifactId>kaptcha-java-17</artifactId>
+      <version>0.0.10</version>
     </dependency>
   </dependencies>
 ```
@@ -40,9 +31,8 @@ package com.example.controller;
 
 import java.io.IOException;
 
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -56,7 +46,7 @@ import com.google.code.kaptcha.servlet.KaptchaExtend;
 public class RegisterKaptchaController extends KaptchaExtend {
 
     @RequestMapping(value = "/captcha.jpg", method = RequestMethod.GET)
-    public void captcha(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    public void captcha(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         super.captcha(req, resp);
     }
 
